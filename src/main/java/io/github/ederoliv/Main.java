@@ -15,8 +15,6 @@ public class Main {
 
         final int TAM_ALFABETO = 25;
 
-        String palavraCifrada = " ";
-
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.print("Digite uma palavra: ");
@@ -26,9 +24,18 @@ public class Main {
         System.out.print("Digite uma chave (1 a 26): ");
 
         int chave = Integer.parseInt(buffer.readLine());
-        int novaChave;
+
 
         System.out.println("Palavra original: " + entradaUsuario);
+
+        cifra(entradaUsuario, chave, TAM_ALFABETO, ALFABETO_MINUSCULO);
+
+    }
+
+    public static void cifra (String entradaUsuario, int chave, final int TAM_ALFABETO, final char[] ALFABETO_MINUSCULO) throws IOException {
+
+        int novaChave;
+        String palavraCifrada = "";
 
         for (int indiceEntrada = 0; indiceEntrada < entradaUsuario.length(); indiceEntrada++) {
 
@@ -45,9 +52,9 @@ public class Main {
 
                 }else {
 
-                        if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
+                    if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                            palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
+                        palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
                     }
                 }
             }
@@ -55,5 +62,6 @@ public class Main {
 
         System.out.print("Palavra Cifrada: ");
         System.out.print(palavraCifrada);
+
     }
 }
