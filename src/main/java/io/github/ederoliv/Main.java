@@ -39,6 +39,18 @@ public class Main {
 
         for (int indiceEntrada = 0; indiceEntrada < entradaUsuario.length(); indiceEntrada++) {
 
+            /*verifica se o caractere daquele laço for é um espaço, caso seja, eu mantenho o espaço
+            na mesmo posição da frase cifrada e incremeto o valor do indice que será usado pra buscar
+            o caractere equivalente da frase no alfabeto, para então fazer o reposicionamento com a chave
+             */
+            if (Character.isWhitespace(entradaUsuario.charAt(indiceEntrada))) {
+
+                palavraCifrada = palavraCifrada + " ";
+                indiceEntrada++;
+
+
+            }
+
             for (int indiceAlfabeto = 0; indiceAlfabeto <= TAM_ALFABETO; indiceAlfabeto++ ){
 
                 if((indiceAlfabeto + chave) > TAM_ALFABETO){
