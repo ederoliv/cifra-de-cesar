@@ -8,6 +8,17 @@ import java.util.Locale;
 public class Main {
 
     //CONTRANTES UTILIZADAS
+
+    static final String LETREIRO = """
+                     _____                            _____ _       _            _______          _
+                     / ____|                          / ____(_)     | |          |__   __|        | |
+                    | |     __ _  ___  ___  __ _ _ __| |     _ _ __ | |__   ___ _ __| | ___   ___ | |
+                    | |    / _` |/ _ \\/ __|/ _` | '__| |    | | '_ \\| '_ \\ / _ \\ '__| |/ _ \\ / _ \\| |
+                    | |___| (_| |  __/\\__ \\ (_| | |  | |____| | |_) | | | |  __/ |  | | (_) | (_) | |
+                     \\_____\\__,_|\\___||___/\\__,_|_|   \\_____|_| .__/|_| |_|\\___|_|  |_|\\___/ \\___/|_|
+                                                              | |
+                                                              |_|
+                                                              """;
     static final char[] ALFABETO_MINUSCULO = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -77,6 +88,8 @@ public class Main {
 
     public static void decifra() throws IOException{
         System.out.println("Decifra");
+
+
     }
 
     public static void bruteForce(BufferedReader buffer) throws IOException{
@@ -89,14 +102,14 @@ public class Main {
 
         String entradaUsuario = buffer.readLine().toLowerCase(Locale.getDefault());
 
-        System.out.print("Digite uma chave (1 a 26): ");
-
-        int chave = Integer.parseInt(buffer.readLine());
+        int chave = 0;
 
 
         for (int indiceBruteForce = 0; indiceBruteForce <= TAM_ALFABETO; indiceBruteForce++) {
 
-            System.out.println("\n Chave: " + (indiceBruteForce + 1) + " Resultado: ");
+            chave = indiceBruteForce + 1;
+
+            System.out.print("\nChave: " + (chave) + " Resultado: ");
 
             for (int indiceEntrada = 0; indiceEntrada < entradaUsuario.length(); indiceEntrada++) {
 
@@ -127,17 +140,24 @@ public class Main {
                     }
                 }
             }
+
+            System.out.print(palavraCifrada);
+
+            palavraCifrada = "";
         }
 
+        System.out.println("\n");
     }
 
     public static void menu (BufferedReader buffer) throws IOException{
 
         String opcao = "";
 
+        System.out.println(LETREIRO);
+
         while (true) {
 
-            System.out.print("\nEscolha uma opção: \n 1 - Cifrar \n 2 - Decifrar \n 3 - Força bruta \n 0 - Sair \n opcao: ");
+            System.out.print("Escolha uma opção: \n 1 - Cifrar \n 2 - Decifrar \n 3 - Força bruta \n 0 - Sair \n opcao: ");
             opcao = buffer.readLine();
 
             switch (opcao) {
