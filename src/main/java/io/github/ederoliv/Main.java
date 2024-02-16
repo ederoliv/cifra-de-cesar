@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class Main {
 
-    //CONTRANTES UTILIZADAS
+    //CONSTANTES UTILIZADAS
 
     static final String LETREIRO = """
                      _____                            _____ _       _            _______          _
@@ -86,8 +86,52 @@ public class Main {
     }
 
 
-    public static void decifra() throws IOException{
-        System.out.println("Decifra");
+    public static void decifra(BufferedReader buffer) throws IOException{
+        System.out.println("Decifra! ");
+
+        String palavraDecifrada = "";
+        int novaChave;
+
+        System.out.print("Digite uma palavra: ");
+
+        String entradaUsuario = buffer.readLine().toLowerCase(Locale.getDefault());
+
+        System.out.print("Digite uma chave (1 a 26): ");
+
+        int chave = Integer.parseInt(buffer.readLine());
+
+
+        for (int indiceEntrada = 0; indiceEntrada < entradaUsuario.length(); indiceEntrada++) {
+
+            if (Character.isWhitespace(entradaUsuario.charAt(indiceEntrada))) {
+
+                palavraDecifrada = palavraDecifrada + " ";
+                indiceEntrada++;
+
+            }
+
+            for (int indiceAlfabeto = 0; indiceAlfabeto <= TAM_ALFABETO; indiceAlfabeto++ ){
+
+                if((TAM_ALFABETO - (indiceAlfabeto + chave)) < 0){
+
+                    if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
+
+                        novaChave = ((indiceAlfabeto + chave) - TAM_ALFABETO);
+                        palavraDecifrada = palavraDecifrada + ALFABETO_MINUSCULO[novaChave - 1];
+
+                    }
+
+                }else {
+
+                    if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
+
+                        palavraDecifrada = palavraDecifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
+                    }
+                }
+            }
+        }
+
+        System.out.println("Palavra Cifrada: " + palavraDecifrada);
 
 
     }
@@ -162,7 +206,7 @@ public class Main {
 
             switch (opcao) {
                 case "1" -> cifra(buffer);
-                case "2" -> decifra();
+                case "2" -> decifra(buffer);
                 case "3" -> bruteForce(buffer);
                 case "0" -> System.exit(0);
             }
