@@ -54,7 +54,7 @@ public class Main {
              */
             if (Character.isWhitespace(entradaUsuario.charAt(indiceEntrada))) {
 
-                palavraCifrada = palavraCifrada + " ";
+                palavraCifrada = palavraCifrada.concat(Character.toString(' '));
                 indiceEntrada++;
 
             }
@@ -67,7 +67,7 @@ public class Main {
                     if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
                         novaChave = ((indiceAlfabeto + chave) - TAM_ALFABETO);
-                        palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[novaChave - 1];
+                        palavraCifrada = palavraCifrada.concat(Character.toString(ALFABETO_MINUSCULO[novaChave - 1]));
 
                     }
 
@@ -75,7 +75,7 @@ public class Main {
 
                     if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                        palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
+                        palavraCifrada = palavraCifrada.concat(Character.toString(ALFABETO_MINUSCULO[indiceAlfabeto + chave]));
                     }
                 }
             }
@@ -105,19 +105,19 @@ public class Main {
 
             if (Character.isWhitespace(entradaUsuario.charAt(indiceEntrada))) {
 
-                palavraDecifrada = palavraDecifrada + " ";
+                palavraDecifrada = palavraDecifrada.concat(Character.toString(' '));
                 indiceEntrada++;
 
             }
 
             for (int indiceAlfabeto = 0; indiceAlfabeto <= TAM_ALFABETO; indiceAlfabeto++ ){
 
-                if((TAM_ALFABETO - (indiceAlfabeto + chave)) < 0){
+                if((indiceAlfabeto - chave) < 0 ){
 
                     if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                        novaChave = ((indiceAlfabeto + chave) - TAM_ALFABETO);
-                        palavraDecifrada = palavraDecifrada + ALFABETO_MINUSCULO[novaChave - 1];
+                        novaChave = ((indiceAlfabeto - chave) + TAM_ALFABETO);
+                        palavraDecifrada = palavraDecifrada.concat(Character.toString(ALFABETO_MINUSCULO[novaChave + 1]));
 
                     }
 
@@ -125,7 +125,7 @@ public class Main {
 
                     if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                        palavraDecifrada = palavraDecifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
+                        palavraDecifrada = palavraDecifrada.concat(Character.toString(ALFABETO_MINUSCULO[indiceAlfabeto - chave]));
                     }
                 }
             }
@@ -133,20 +133,19 @@ public class Main {
 
         System.out.println("Palavra Cifrada: " + palavraDecifrada);
 
-
     }
 
     public static void bruteForce(BufferedReader buffer) throws IOException{
         System.out.println("Força Bruta!");
 
-        String palavraCifrada = "";
+        String palavraDecifrada = "";
         int novaChave;
 
         System.out.print("Digite uma palavra: ");
 
         String entradaUsuario = buffer.readLine().toLowerCase(Locale.getDefault());
 
-        int chave = 0;
+        int chave;
 
 
         for (int indiceBruteForce = 0; indiceBruteForce <= TAM_ALFABETO; indiceBruteForce++) {
@@ -159,35 +158,35 @@ public class Main {
 
                 if (Character.isWhitespace(entradaUsuario.charAt(indiceEntrada))) {
 
-                    palavraCifrada = palavraCifrada + " ";
+                    palavraDecifrada = palavraDecifrada.concat(Character.toString(' '));
                     indiceEntrada++;
 
                 }
 
-                for (int indiceAlfabeto = 0; indiceAlfabeto <= TAM_ALFABETO; indiceAlfabeto++) {
+                for (int indiceAlfabeto = 0; indiceAlfabeto <= TAM_ALFABETO; indiceAlfabeto++ ){
 
-                    if ((indiceAlfabeto + chave) > TAM_ALFABETO) {
+                    if((indiceAlfabeto - chave) < 0 ){
 
                         if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                            novaChave = ((indiceAlfabeto + chave) - TAM_ALFABETO);
-                            palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[novaChave - 1];
+                            novaChave = ((indiceAlfabeto - chave) + TAM_ALFABETO);
+                            palavraDecifrada = palavraDecifrada.concat(Character.toString(ALFABETO_MINUSCULO[novaChave + 1]));
 
                         }
 
-                    } else {
+                    }else {
 
                         if (entradaUsuario.charAt(indiceEntrada) == ALFABETO_MINUSCULO[indiceAlfabeto]) {
 
-                            palavraCifrada = palavraCifrada + ALFABETO_MINUSCULO[indiceAlfabeto + chave];
+                            palavraDecifrada = palavraDecifrada.concat(Character.toString(ALFABETO_MINUSCULO[indiceAlfabeto - chave]));
                         }
                     }
                 }
             }
 
-            System.out.print(palavraCifrada);
+            System.out.print(palavraDecifrada);
 
-            palavraCifrada = "";
+            palavraDecifrada = "";
         }
 
         System.out.println("\n");
@@ -195,7 +194,7 @@ public class Main {
 
     public static void menu (BufferedReader buffer) throws IOException{
 
-        String opcao = "";
+        String opcao;
 
         System.out.println(LETREIRO);
 
@@ -211,7 +210,5 @@ public class Main {
                 case "0" -> System.exit(0);
             }
         }
-
-
     }
 }
